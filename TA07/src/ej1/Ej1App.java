@@ -1,5 +1,7 @@
 package ej1;
 
+//Autor Eloi Martorell Martin 11/04/2022
+
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Scanner;
@@ -12,8 +14,29 @@ public class Ej1App {
 
 		Hashtable <String,Double> notasAlumnos = new Hashtable<String,Double>();
 		
-		introducirNotas(notasAlumnos);
-		proporcionarDatos(notasAlumnos);
+		int menu;
+		do {
+			System.out.println();
+			System.out.println("1 Entrar datos - 2 Mostrar datos - 0 Salir");
+			menu = sc.nextInt();
+			
+			switch (menu) {
+			case 1:
+				introducirNotas(notasAlumnos);
+				break;
+			case 2:
+				proporcionarDatos(notasAlumnos);
+				break;
+			case 0:
+				System.out.println("¡Gracias por usar mi programa!");
+				break;
+
+			default:
+				System.out.println("¡Tienes que introducir una de las opciones!");
+				break;
+			}
+			
+		}while(menu != 0);
 		
 		sc.close();
 	}
