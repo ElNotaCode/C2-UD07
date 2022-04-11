@@ -43,14 +43,11 @@ public class Ej2App {
 				mostrarCarrito();
 				break;
 			case 3:
-				
 				pagarProductos();
-				
 				break;
 			case 0:
-				System.out.println("¡Gracias por comprar en nuestras tiendas!");
+				System.out.println("¡Gracias por visitar nuestras tiendas!");
 				break;
-
 			default:
 				System.out.println("¡Tienes que introducir una de las opciones!");
 				break;
