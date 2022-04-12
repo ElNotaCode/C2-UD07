@@ -168,19 +168,19 @@ public class Ej2App {
 		
 		double precioTotal = 0;
 		
-		Object key = null;
-		Iterator<String> iter = carrito.keySet().iterator();
+		Object value = null;
+		Iterator<String> iter = carrito.keySet().iterator(); //pillamos la key
 		
 		while (iter.hasNext()) {
 			//sacamos los ids y la cantidad 
-			key = iter.next();
-			int cantidad = carrito.get(key);
+			value = iter.next();
+			int cantidad = carrito.get(value);
 			
 			if(cantidad > 0) {
 				//Nombre, precio y precio + IVA
-				String nombre = nombreProductos.get(key);
-				double precio = precioProductos.get(key);
-				double IvaAplicado = IVAProductos.get(key);
+				String nombre = nombreProductos.get(value);
+				double precio = precioProductos.get(value);
+				double IvaAplicado = IVAProductos.get(value);
 				double precioConIva = (precio*cantidad)+((precio*cantidad)*IvaAplicado);
 				
 				System.out.println();

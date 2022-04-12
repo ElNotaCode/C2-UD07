@@ -2,6 +2,7 @@ package ej3;
 
 import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.Iterator;
 import java.util.Scanner;
 
 //Autor Eloi Martorell Martin 11/04/2022
@@ -17,8 +18,7 @@ public class Ej3App {
 	public static void main(String[] args) {
 		//cargamos pre-existentes
 		cargarProductos();
-		agregarProductos();
-		listarProductos();
+		vistaEditor();
 		
 		sc.close();
 		
@@ -97,7 +97,74 @@ public class Ej3App {
 	//consultar info especifica / editar
 	public static void vistaEditor() {
 		
+		//vista general con info para saber la ID y la info a editar
+		listarProductos();
+		int id = nombreProductos.size();
+		//preguntar ID
+		int idSc;
+		do{
+			System.out.println("Introduce una Id de un producto para la vista editor:");
+			idSc = sc.nextInt();
+		}while(idSc <= 0 || idSc > id);
+		String IdScStr = new String(Integer.toString(idSc));
 		
+		//abrir vista de la ID
+		Object value = null;
+		Iterator<String> iter = nombreProductos.keySet().iterator();
+		
+		while (iter.hasNext()) {
+			value = iter.next();
+			//nombre //precio //stock
+			if(IdScStr.equals(value))
+			System.out.println( nombreProductos.get(value) + " Precio: " + precioProductos.get(value) +
+					" Stock: " + stock.get(value));
+			
+		}
+		
+		//preguntar si quiere editar
+		System.out.println("Quieres editar el producto? (Introduce Si o No)");
+		String opcionString = new String();
+		opcionString = sc.next();
+		opcionString = opcionString.toUpperCase();
+		if(opcionString.equals("SI")) {
+			
+			System.out.println("Borrar o editar?");
+			opcionString = sc.next();
+			opcionString = opcionString.toUpperCase();
+			if(opcionString.equals("BORRAR")) {
+				borrarProducto(IdScStr);
+			}else if(opcionString.equals("EDITAR")) {
+				System.out.println("EDITAR");
+				
+			}
+
+		}
+		
+	}
+	
+	//borrar
+	public static void borrarProducto(String id) {
+		
+		Object key = null;
+		Iterator<String> iter = nombreProductos.keySet().iterator();
+		
+		while (iter.hasNext()) {
+			
+			key = iter.next();
+			if(id.equals(key)) {
+				nombreProductos.remove(key);
+				precioProductos.remove(key);
+				stock.remove(key);
+			}
+			
+		}
+	
+		listarProductos();
+		
+	}
+	
+	//editar TO DO
+	public static void editarProducto(String id) {
 		
 	}
 	
@@ -119,11 +186,6 @@ public class Ej3App {
 		
 		System.out.println();
 		System.out.println();
-		
-	}
-	
-	//borrar
-	public static void borrarProducto() {
 		
 	}
 
