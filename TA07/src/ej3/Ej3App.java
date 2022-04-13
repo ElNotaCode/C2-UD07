@@ -4,6 +4,7 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Scanner;
+import javax.management.NotCompliantMBeanException;
 
 //Autor Eloi Martorell Martin 11/04/2022
 
@@ -88,10 +89,33 @@ public class Ej3App {
 		
 	}
 	
+	public static int getLast() {
+		Iterator<String> iter = nombreProductos.keySet().iterator();
+		String id = null;
+		
+		while (iter.hasNext()) {
+			
+			 id = iter.next();
+			
+		}
+		
+		if(id == null) {
+			id = "0";
+		}
+		
+		Integer idInt = Integer.parseInt(id);
+		
+		return idInt;
+		
+	}
+	
 	//añadir articulos
 	public static void agregarProductos() {
 		
-		int id = nombreProductos.size() + 1;
+		
+		
+		int id = getLast() + 1;
+		
 		String idString = new String(Integer.toString(id));
 		
 		System.out.println("Bienvenido al asistente de Stock Management(™)");
@@ -125,13 +149,12 @@ public class Ej3App {
 		
 		//vista general con info para saber la ID y la info a editar
 		listarProductos();
-		int id = nombreProductos.size();
 		//preguntar ID
 		int idSc;
 		do{
 			System.out.println("Introduce una Id de un producto para la vista editor:");
 			idSc = sc.nextInt();
-		}while(idSc <= 0 || idSc > id);
+		}while(idSc <= 0);
 		String IdScStr = new String(Integer.toString(idSc));
 		
 		//abrir vista de la ID
