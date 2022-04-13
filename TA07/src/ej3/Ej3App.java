@@ -13,12 +13,38 @@ public class Ej3App {
 	
 	static Hashtable<String,String> nombreProductos = new Hashtable<String,String>();
 	static Hashtable<String, Double> precioProductos = new Hashtable<String, Double>();
-	static Hashtable<String, Integer> stock = new Hashtable<String, Integer>();
+	static Hashtable<String, Integer> stock = new Hashtable<String, Integer>(); //para la próxima usar stockProductos
 
 	public static void main(String[] args) {
 		//cargamos pre-existentes
 		cargarProductos();
-		vistaEditor();
+		
+		System.out.println("¡Bienvenido a Stock Manager™:");
+		int menu;
+		do {
+			
+			System.out.println("1 Agregar un producto - 2 Vista editor - 3 Listar productos - 0 Salir");
+			menu = sc.nextInt();
+			
+			switch (menu) {
+			case 1:
+				agregarProductos();
+				break;
+			case 2:
+				vistaEditor();
+				break;
+			case 3:
+				listarProductos();
+				break;
+			case 0:
+				System.out.println("¡Gracias por usar mi programa!");
+				break;
+			default:
+				System.out.println("¡Tienes que introducir una de las opciones!");
+				break;
+			}
+			
+		}while(menu != 0);
 		
 		sc.close();
 		
@@ -134,7 +160,7 @@ public class Ej3App {
 			if(opcionString.equals("BORRAR")) {
 				borrarProducto(IdScStr);
 			}else if(opcionString.equals("EDITAR")) {
-				System.out.println("EDITAR");
+				editarProducto(IdScStr);
 				
 			}
 
@@ -152,9 +178,10 @@ public class Ej3App {
 			
 			key = iter.next();
 			if(id.equals(key)) {
-				nombreProductos.remove(key);
+				
 				precioProductos.remove(key);
 				stock.remove(key);
+				nombreProductos.remove(key);
 			}
 			
 		}
@@ -165,6 +192,38 @@ public class Ej3App {
 	
 	//editar TO DO
 	public static void editarProducto(String id) {
+		
+		Object key = null;
+		Iterator<String> iter = nombreProductos.keySet().iterator();
+		
+		while (iter.hasNext()) {
+			
+			key = iter.next();
+			if(id.equals(key)) {
+				
+				System.out.println("Introduce un nuevo nombre:");
+				String nombre = new String(sc.next());
+				double precio;
+				do {
+				System.out.println("Introduce un precio valido:");
+				precio = sc.nextDouble();
+				}while(precio <= 0);
+				Integer  stockInt;
+				do {
+					System.out.println("Introduce un stock valido:");
+					stockInt = sc.nextInt();
+				}while(stockInt < 0);
+				
+				nombreProductos.put(id, nombre);
+				precioProductos.put(id, precio);
+				stock.put(id,stockInt);
+				
+				System.out.println( nombreProductos.get(id) + " Precio: " + precioProductos.get(id) +
+						" Stock: " + stock.get(id));
+				
+			}
+			
+		}
 		
 	}
 	
