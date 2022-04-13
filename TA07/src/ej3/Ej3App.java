@@ -4,9 +4,8 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Scanner;
-import javax.management.NotCompliantMBeanException;
 
-//Autor Eloi Martorell Martin 11/04/2022
+//Autor Eloi Martorell Martin 11/04/2022 al 13/04/2022
 
 public class Ej3App {
 	
@@ -15,10 +14,13 @@ public class Ej3App {
 	static Hashtable<String,String> nombreProductos = new Hashtable<String,String>();
 	static Hashtable<String, Double> precioProductos = new Hashtable<String, Double>();
 	static Hashtable<String, Integer> stock = new Hashtable<String, Integer>(); //para la próxima usar stockProductos
+	
+	static int IdIncremental; // vamos a usar esto para hacer la id incremental en un metodo
 
 	public static void main(String[] args) {
 		//cargamos pre-existentes
 		cargarProductos();
+		IdIncremental = nombreProductos.size();
 		
 		System.out.println("¡Bienvenido a Stock Manager™:");
 		int menu;
@@ -89,32 +91,19 @@ public class Ej3App {
 		
 	}
 	
+	//este metodo nos saca la ultima id int, pudiendo así hacer un incremental para agregar una nueva tabla
 	public static int getLast() {
-		Iterator<String> iter = nombreProductos.keySet().iterator();
-		String id = null;
 		
-		while (iter.hasNext()) {
-			
-			 id = iter.next();
-			
-		}
+		IdIncremental++;
 		
-		if(id == null) {
-			id = "0";
-		}
-		
-		Integer idInt = Integer.parseInt(id);
-		
-		return idInt;
-		
+		return IdIncremental;
+
 	}
 	
 	//añadir articulos
 	public static void agregarProductos() {
 		
-		
-		
-		int id = getLast() + 1;
+		int id = getLast();
 		
 		String idString = new String(Integer.toString(id));
 		
